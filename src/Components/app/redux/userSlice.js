@@ -7,10 +7,23 @@ export const userSlice = createSlice({
         age: "22",
         about: "I'm a software engineer",
         avaUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbGAMLuWQcxug2Gvm-1f1fIZLG-zSVcTTQxQ&usqp=CAU",
-        themeColor: "#ff9051"
+        themeColor: "#ff9051",
+        pending: false,
+        error: false,
     },
     reducers: {
-        update:(state,action) => {
+        updateStart: (state) => {
+            state.pending = true;
+        },
+
+        updateError: (state) => {
+            state.pending = false;
+            state.error = true;
+        },
+
+        updateSuccess:(state,action) => {
+            state.pending = false;
+            state.error = false;
             state.name = action.payload.name;
             state.age = action.payload.age;
             state.about = action.payload.about;
@@ -20,6 +33,6 @@ export const userSlice = createSlice({
     }
 });
 
-export const {update} = userSlice.actions;
+export const {updateStart,updateError,updateSuccess} = userSlice.actions;
 
 export default userSlice.reducer;

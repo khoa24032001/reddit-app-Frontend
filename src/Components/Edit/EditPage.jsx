@@ -2,10 +2,11 @@ import "./edit.css"
 import { useState } from "react";
 import Input from "../InputFields/Input";
 import { useSelector, useDispatch } from "react-redux";
-import { update } from "../app/redux/userSlice";
+// import { update } from "../app/redux/userSlice";
+import { updateUser } from "../app/redux/apiRequest";
 
 const EditPage = (props) => {
-    const {setEdit} = props
+    const {setEdit} = props;
     const avaUrl = [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGPtuVOh3Fhvp7oC4C5RG-s3TEk_Ca9bzGmQ&usqp=CAU",
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbGAMLuWQcxug2Gvm-1f1fIZLG-zSVcTTQxQ&usqp=CAU",
@@ -27,14 +28,14 @@ const EditPage = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setEdit(false);
-        const updateUser = {
+        const updatedUser = {
             name: name,
             age: age,
             about: about,
             avaUrl: url,
             themeColor: theme,
         }
-        dispatch(update(updateUser));
+        updateUser(updatedUser,dispatch);
     }
 
     
